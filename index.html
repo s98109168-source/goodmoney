@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>福報金流 - 讓善意被看見的公益儀式</title>
+  <style>
+    /* ==========================================
+       CSS RESET & VARIABLES
+       ========================================== */
+    :root {
+      --bg-cream: #FDFBF7;
+      --bg-card: #FAF6F0;
+      --text-dark: #2C3531;
+      --text-muted: #6B7280;
+      --gold-primary: #D4AF37;
+      --gold-soft: #E6CA65;
+      --gold-light: #F9F3E3;
+      --accent-orange: #E07A5F;
+      --accent-green: #2A9D8F;
+      --accent-green-dark: #1E3F3A;
+      --border-color: #E8E2D8;
+      
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+      --font-serif: "Noto Serif TC", Georgia, Cambria, serif;
+      
+      --shadow-sm: 0 2px 8px rgba(44, 53, 49, 0.04);
+      --shadow-md: 0 8px 24px rgba(44, 53, 49, 0.08);
+      --shadow-lg: 0 16px 32px rgba(44, 53, 49, 0.12);
+      
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+      
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ambient background graphics */
+    .ambient-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .ambient-circle {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.35;
+      animation: floatAmbient 20s infinite alternate cubic-bezier(0.45, 0, 0.55, 1);
+    }
+
+    .ambient-circle-1 {
+      width: 40vw;
+      height: 40vw;
+      background: var(--gold-soft);
+      top: -10vw;
+      right: -10vw;
+    }
+
+    .ambient-circle-2 {
+      width: 50vw;
+      height: 50vw;
+      background: #F4A261;
+      bottom: -15vw;
+      left: -15vw;
+      animation-delay: -7s;
+    }
+
+    @keyframes floatAmbient {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, 50px) scale(1.08); }
+    }
+
+    /* ==========================================
+       TYPOGRAPHY & BASE COMPONENTS
+       ========================================== */
+    h1, h2, h3, h4 {
+      font-family: var(--font-serif);
+      font-weight: 600;
+      color: var(--accent-green-dark);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0.75rem 2rem;
+      font-size: 1.05rem;
+      font-weight: 500;
+      border-radius: var(--radius-full);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      outline: none;
+      user-select: none;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-green-dark);
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(30, 63, 58, 0.25);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-green);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(42, 157, 143, 0.35);
+    }
+
+    .btn-secondary {
+      background-color: #FFFFFF;
+      color: var(--accent-green-dark);
+      border-color: var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold-primary);
+      background-color: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background: var(--gold-light);
+      color: #B8860B;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border-radius: var(--radius-full);
+      margin-bottom: 1rem;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    /* Header Nav */
+    header {
+      padding: 1.5rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent-green-dark);
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--gold-primary), var(--accent-orange));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.1rem;
+    }
+
+    /* ==========================================
+       SECTION 1: HERO
+       ========================================== */
+    .hero {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 0 6rem 0;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      line-height: 1.25;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    .hero-graphic {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ripple-ring {
+      position: absolute;
+      border: 1px solid var(--gold-primary);
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: ripple 4s infinite cubic-bezier(0.1, 0.8, 0.3, 1);
+    }
+
+    .ripple-ring:nth-child(1) { width: 40px; height: 40px; animation-delay: 0s; }
+    .ripple-ring:nth-child(2) { width: 80px; height: 80px; animation-delay: 1s; }
+    .ripple-ring:nth-child(3) { width: 120px; height: 120px; animation-delay: 2s; }
+
+    @keyframes ripple {
+      0% { transform: scale(0.3); opacity: 0.8; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+
+    .drop-icon {
+      font-size: 2.2rem;
+      color: var(--gold-primary);
+      z-index: 2;
+      animation: pulseDrop 3s infinite ease-in-out;
+    }
+
+    @keyframes pulseDrop {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+    }
+
+    /* ==========================================
+       SECTION 2: RITUAL (DONATION STEPS)
+       ========================================== */
+    .ritual-section {
+      padding: 4rem 0;
+    }
+
+    .ritual-card {
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Step indicator */
+    .step-indicator {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .step-indicator::before {
+      content: '';
+      position: absolute;
+      top: 18px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--border-color);
+      z-index: 0;
+    }
+
+    .step-progress-bar {
+      position: absolute;
+      top: 18px;
+      left: 0;
+      height: 2px;
+      background: var(--gold-primary);
+      z-index: 0;
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+
+    .step-item {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      background: #FFFFFF;
+      padding: 0 0.5rem;
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: 2px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    .step-item.active .step-num {
+      border-color: var(--gold-primary);
+      background: var(--gold-primary);
+      color: white;
+    }
+
+    .step-item.completed .step-num {
+      border-color: var(--accent-green);
+      background: var(--accent-green);
+      color: white;
+    }
+
+    .step-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .step-item.active .step-label {
+      color: var(--accent-green-dark);
+      font-weight: 600;
+    }
+
+    /* Steps Content Container */
+    .step-content {
+      display: none;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    .step-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-title {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .step-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    /* STEP 1: Amount selection */
+    .amount-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .amount-btn {
+      min-height: 60px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .amount-btn:hover {
+      border-color: var(--gold-primary);
+      background: var(--gold-light);
+    }
+
+    .amount-btn.selected {
+      border-color: var(--gold-primary);
+      background: var(--gold-light);
+      color: #9A7B0A;
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+    }
+
+    .custom-amount-wrap {
+      margin-top: 1rem;
+      display: none;
+    }
+
+    .custom-amount-wrap.active {
+      display: block;
+    }
+
+    .input-group {
+      position: relative;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    .input-prefix {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 0.85rem 1rem 0.85rem 3.5rem;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      font-size: 1.1rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-input:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+    }
+
+    /* STEP 2: Cause selection */
+    .cause-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .cause-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cause-card:hover {
+      border-color: var(--gold-primary);
+      transform: translateY(-2px);
+    }
+
+    .cause-card.selected {
+      border-color: var(--accent-green);
+      background: rgba(42, 157, 143, 0.08);
+      box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.15);
+    }
+
+    .cause-icon {
+      font-size: 1.8rem;
+    }
+
+    .cause-title {
+      font-weight: 600;
+      color: var(--text-dark);
+      font-size: 1rem;
+    }
+
+    /* STEP 3: Blessing Message */
+    .textarea-wrap {
+      max-width: 550px;
+      margin: 0 auto 1.5rem auto;
+    }
+
+    .form-textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 1rem;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      font-family: var(--font-sans);
+      outline: none;
+      resize: vertical;
+      transition: var(--transition);
+    }
+
+    .form-textarea:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+    }
+
+    /* STEP 4: Review Card */
+    .preview-card-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .intention-card {
+      width: 100%;
+      max-width: 420px;
+      background: linear-gradient(145deg, #FAF6F0, #FFFDF9);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+      position: relative;
+    }
+
+    .intention-card::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      bottom: 8px;
+      border: 1px dashed rgba(212, 175, 55, 0.3);
+      border-radius: calc(var(--radius-md) - 4px);
+      pointer-events: none;
+    }
+
+    .card-header-title {
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    .card-amount-display {
+      font-size: 2.2rem;
+      font-family: var(--font-serif);
+      color: var(--accent-green-dark);
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .card-cause-display {
+      display: inline-block;
+      padding: 0.25rem 0.85rem;
+      background: var(--gold-light);
+      color: #9A7B0A;
+      border-radius: var(--radius-full);
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-blessing-quote {
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--text-dark);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      position: relative;
+      padding: 0 1rem;
+    }
+
+    /* Ritual Controls */
+    .ritual-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* ==========================================
+       SECTION 3: RITUAL ANIMATION OVERLAY
+       ========================================== */
+    .overlay-ritual {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(18, 28, 26, 0.92);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.8s ease;
+      color: #FFFFFF;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .overlay-ritual.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .light-stage {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .core-light {
+      width: 12px;
+      height: 12px;
+      background: #FFF;
+      border-radius: 50%;
+      box-shadow: 0 0 20px 10px rgba(255, 235, 170, 0.9);
+      transform: scale(0.1);
+      transition: transform 2.5s ease-out;
+    }
+
+    .overlay-ritual.animating .core-light {
+      transform: scale(3.5);
+    }
+
+    .lotus-glow {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      opacity: 0;
+      transform: scale(0.6);
+      transition: all 2s ease 1s;
+    }
+
+    .overlay-ritual.animating .lotus-glow {
+      opacity: 0.85;
+      transform: scale(1);
+    }
+
+    .particle-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .ritual-text-1 {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      color: var(--gold-soft);
+      margin-bottom: 0.75rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 1s ease 1.5s;
+    }
+
+    .ritual-text-2 {
+      font-size: 1.1rem;
+      color: #E2E8F0;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 1s ease 2.3s;
+      font-weight: 300;
+    }
+
+    .ritual-text-3 {
+      font-size: 0.95rem;
+      color: var(--gold-soft);
+      opacity: 0;
+      transition: opacity 1s ease 3.1s;
+      max-width: 480px;
+      line-height: 1.8;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 1rem;
+    }
+
+    .overlay-ritual.animating .ritual-text-1,
+    .overlay-ritual.animating .ritual-text-2,
+    .overlay-ritual.animating .ritual-text-3 {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Reduced Motion fallback */
+    @media (prefers-reduced-motion: reduce) {
+      .core-light, .lotus-glow, .ritual-text-1, .ritual-text-2, .ritual-text-3 {
+        transition: opacity 0.5s ease !important;
+        transform: none !important;
+      }
+      .overlay-ritual.animating .core-light { transform: none; opacity: 1; }
+      .overlay-ritual.animating .lotus-glow { transform: none; opacity: 1; }
+      .ripple-ring { animation: none; opacity: 0.2; }
+      .drop-icon { animation: none; }
+    }
+
+    /* ==========================================
+       SECTION 4: IMPRINT RESULT CARD
+       ========================================== */
+    .imprint-section {
+      display: none;
+      padding: 3rem 0;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .imprint-section.active {
+      display: block;
+    }
+
+    .imprint-card {
+      max-width: 460px;
+      margin: 0 auto;
+      background: #FFFFFF;
+      border: 2px solid var(--gold-primary);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+      position: relative;
+    }
+
+    .imprint-card-header {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--accent-green-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .imprint-divider {
+      width: 40px;
+      height: 2px;
+      background: var(--gold-primary);
+      margin: 1rem auto;
+    }
+
+    .imprint-heart {
+      color: var(--accent-orange);
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .imprint-details {
+      margin-bottom: 1.5rem;
+      text-align: left;
+      background: var(--bg-card);
+      padding: 1.25rem;
+      border-radius: var(--radius-md);
+    }
+
+    .imprint-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+    }
+
+    .imprint-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .imprint-label {
+      color: var(--text-muted);
+    }
+
+    .imprint-val {
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .imprint-blessing-box {
+      font-family: var(--font-serif);
+      color: var(--accent-green-dark);
+      background: var(--gold-light);
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .imprint-disclaimer {
+      font-size: 0.825rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .imprint-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    /* ==========================================
+       SECTION 5: GOAL PROGRESS & WALL
+       ========================================== */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      margin: 4rem 0;
+    }
+
+    @media (min-width: 768px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .dash-card {
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .dash-title {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .demo-tag {
+      font-size: 0.75rem;
+      background: #E5E7EB;
+      color: #4B5563;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-family: var(--font-sans);
+      font-weight: normal;
+    }
+
+    /* Progress bar */
+    .goal-values {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.75rem;
+    }
+
+    .goal-current {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent-green-dark);
+      font-family: var(--font-serif);
+    }
+
+    .goal-target {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 12px;
+      background: var(--bg-card);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 68.5%;
+      background: linear-gradient(90deg, var(--gold-soft), var(--accent-green));
+      border-radius: var(--radius-full);
+      transition: width 1s ease;
+    }
+
+    .goal-notice {
+      font-size: 0.875rem;
+      color: var(--accent-orange);
+      background: rgba(224, 122, 95, 0.08);
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .goal-notice.active {
+      display: block;
+    }
+
+    /* Wall list */
+    .wall-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-height: 280px;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+    }
+
+    .wall-item {
+      background: var(--bg-card);
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      border-left: 3px solid var(--gold-primary);
+      font-size: 0.95rem;
+    }
+
+    .wall-cause {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+      display: block;
+    }
+
+    .wall-disclaimer {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    /* ==========================================
+       SECTION 6: FOOTER & DEMO BANNER
+       ========================================== */
+    .demo-banner {
+      background: #FFFBEB;
+      border-top: 1px solid #FCD34D;
+      border-bottom: 1px solid #FCD34D;
+      color: #92400E;
+      text-align: center;
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+    }
+
+    footer {
+      padding: 3rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border-color);
+      margin-top: 4rem;
+    }
+
+    .footer-quote {
+      font-family: var(--font-serif);
+      color: var(--accent-green-dark);
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    /* ==========================================
+       RESPONSIVE DESIGN (MOBILE FIRST OVERRIDES)
+       ========================================== */
+    @media (max-width: 640px) {
+      .ritual-card {
+        padding: 1.5rem 1rem;
+      }
+
+      .step-label {
+        display: none;
+      }
+
+      .step-indicator {
+        margin-bottom: 2rem;
+      }
+
+      .amount-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .cause-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ritual-controls {
+        flex-direction: column-reverse;
+        gap: 0.75rem;
+      }
+
+      .ritual-controls .btn {
+        width: 100%;
+      }
+
+      .hero-title {
+        font-size: 2.2rem;
+      }
+
+      .card-amount-display {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Light Background -->
+  <div class="ambient-bg">
+    <div class="ambient-circle ambient-circle-1"></div>
+    <div class="ambient-circle ambient-circle-2"></div>
+  </div>
+
+  <!-- Global Header -->
+  <header class="container">
+    <a href="#" class="logo">
+      <div class="logo-icon">福</div>
+      <span>福報金流</span>
+    </a>
+    <span class="badge">公益互動體驗</span>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero container">
+    <div class="hero-graphic">
+      <div class="ripple-ring"></div>
+      <div class="ripple-ring"></div>
+      <div class="ripple-ring"></div>
+      <div class="drop-icon">💧</div>
+    </div>
+    <h1 class="hero-title">讓善意，留下痕跡。</h1>
+    <p class="hero-subtitle">每一份心意，都可以成為支持他人的力量。在這裡，我們用透明與真誠，記錄點滴匯聚的溫暖。</p>
+    <a href="#ritual" class="btn btn-primary">開始一場善意</a>
+  </section>
+
+  <!-- Interactive Ritual Section -->
+  <section id="ritual" class="ritual-section container">
+    
+    <!-- STEP PROCESSOR -->
+    <div class="ritual-card" id="ritual-card">
+      
+      <!-- Progress Indicator -->
+      <div class="step-indicator">
+        <div class="step-progress-bar" id="progress-bar"></div>
+        <div class="step-item active" id="step-node-1">
+          <div class="step-num">1</div>
+          <span class="step-label">心意</span>
+        </div>
+        <div class="step-item" id="step-node-2">
+          <div class="step-num">2</div>
+          <span class="step-label">方向</span>
+        </div>
+        <div class="step-item" id="step-node-3">
+          <div class="step-num">3</div>
+          <span class="step-label">祝福</span>
+        </div>
+        <div class="step-item" id="step-node-4">
+          <div class="step-num">4</div>
+          <span class="step-label">確認</span>
+        </div>
+      </div>
+
+      <!-- STEP 1: Select Amount -->
+      <div class="step-content active" id="step-1">
+        <h2 class="step-title">選擇你的心意</h2>
+        <p class="step-subtitle">選擇一個讓自己感到舒適的支持金額，小額也能匯聚大力量。</p>
+        
+        <div class="amount-grid">
+          <button type="button" class="amount-btn" data-value="100">NT$ 100</button>
+          <button type="button" class="amount-btn selected" data-value="300">NT$ 300</button>
+          <button type="button" class="amount-btn" data-value="500">NT$ 500</button>
+          <button type="button" class="amount-btn" data-value="1000">NT$ 1,000</button>
+          <button type="button" class="amount-btn" data-value="custom">自訂金額</button>
+        </div>
+
+        <div class="custom-amount-wrap" id="custom-wrap">
+          <div class="input-group">
+            <span class="input-prefix">NT$</span>
+            <input type="number" id="custom-amount-input" class="form-input" placeholder="請輸入金額" min="1" step="1">
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: Select Cause -->
+      <div class="step-content" id="step-2">
+        <h2 class="step-title">選擇你想支持的方向</h2>
+        <p class="step-subtitle">每一份資源都會點亮不同的領域。</p>
+        
+        <div class="cause-grid">
+          <div class="cause-card selected" data-cause="弱勢家庭" data-icon="🌱">
+            <span class="cause-icon">🌱</span>
+            <span class="cause-title">弱勢家庭</span>
+          </div>
+          <div class="cause-card" data-cause="兒童教育" data-icon="📚">
+            <span class="cause-icon">📚</span>
+            <span class="cause-title">兒童教育</span>
+          </div>
+          <div class="cause-card" data-cause="長者關懷" data-icon="🍚">
+            <span class="cause-icon">🍚</span>
+            <span class="cause-title">長者關懷</span>
+          </div>
+          <div class="cause-card" data-cause="緊急援助" data-icon="🤝">
+            <span class="cause-icon">🤝</span>
+            <span class="cause-title">緊急援助</span>
+          </div>
+          <div class="cause-card" data-cause="自由支持" data-icon="💛">
+            <span class="cause-icon">💛</span>
+            <span class="cause-title">自由支持</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Write Blessing -->
+      <div class="step-content" id="step-3">
+        <h2 class="step-title">寫下一句祝福</h2>
+        <p class="step-subtitle">字句雖短，卻能帶來溫暖與勇氣。（此項目非必填）</p>
+        
+        <div class="textarea-wrap">
+          <textarea id="blessing-input" class="form-textarea" placeholder="如果你願意，可以留下一句給受助者的話……&#10;例如：「願你今天比昨天更有力量。」"></textarea>
+        </div>
+      </div>
+
+      <!-- STEP 4: Review Intention Card -->
+      <div class="step-content" id="step-4">
+        <h2 class="step-title">準備完成你的善意</h2>
+        <p class="step-subtitle">檢視你的善意卡片，這將是一份專屬於你的溫暖紀錄。</p>
+        
+        <div class="preview-card-wrap">
+          <div class="intention-card">
+            <div class="card-header-title">我願意為公益付出</div>
+            <div class="card-amount-display" id="review-amount">NT$ 300</div>
+            <div class="card-cause-display" id="review-cause">支持：弱勢家庭</div>
+            <div class="card-blessing-quote" id="review-blessing">
+              「願這份心意，成為另一個人的一點力量。」
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="ritual-controls">
+        <button type="button" class="btn btn-secondary" id="btn-prev" style="visibility: hidden;">上一步</button>
+        <button type="button" class="btn btn-primary" id="btn-next">下一步</button>
+      </div>
+
+    </div>
+
+    <!-- IMPRINT RESULT SECTION (Shown after ritual) -->
+    <div class="imprint-section" id="imprint-section">
+      <div class="imprint-card">
+        <h2 class="imprint-card-header">今日善意印記</h2>
+        <div class="imprint-divider"></div>
+        <span class="imprint-heart">♡</span>
+
+        <div class="imprint-details">
+          <div class="imprint-row">
+            <span class="imprint-label">支持方向</span>
+            <span class="imprint-val" id="res-cause">弱勢家庭</span>
+          </div>
+          <div class="imprint-row">
+            <span class="imprint-label">心意金額</span>
+            <span class="imprint-val" id="res-amount">NT$ 300</span>
+          </div>
+        </div>
+
+        <div class="imprint-blessing-box" id="res-blessing">
+          「願你今天比昨天更有力量。」
+        </div>
+
+        <p class="imprint-disclaimer">這是一份象徵性的善意紀錄。</p>
+
+        <div class="imprint-actions">
+          <button type="button" class="btn btn-primary" id="btn-add-wall">將我的祝福放入善意牆</button>
+          <button type="button" class="btn btn-secondary" id="btn-restart">重新開始</button>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- DASHBOARD: GOAL PROGRESS & GOODNESS WALL -->
+  <section class="container">
+    <div class="dashboard-grid">
+      
+      <!-- Goal Progress Card -->
+      <div class="dash-card">
+        <h3 class="dash-title">
+          <span>本月公益目標</span>
+          <span class="demo-tag">Demo 示意數據</span>
+        </h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">我們正在一起完成一件事。</p>
+        
+        <div class="goal-values">
+          <span class="goal-current" id="goal-current-text">NT$ 68,500</span>
+          <span class="goal-target">目標 NT$ 100,000</span>
+        </div>
+
+        <div class="progress-track">
+          <div class="progress-fill" id="goal-bar"></div>
+        </div>
+
+        <div class="goal-notice" id="goal-demo-notice">
+          💡 如果這是一筆真實捐款，公益目標將前進 <span id="notice-amount">NT$ 300</span>。
+        </div>
+      </div>
+
+      <!-- Goodness Wall Card -->
+      <div class="dash-card">
+        <h3 class="dash-title">
+          <span>善意牆</span>
+          <span class="demo-tag">Demo 互動</span>
+        </h3>
+        <div class="wall-list" id="wall-list">
+          <div class="wall-item">
+            「願每個需要幫助的人，都有人伸出手。」
+            <span class="wall-cause">支持：弱勢家庭</span>
+          </div>
+          <div class="wall-item">
+            「希望今天的善意，可以延續到明天。」
+            <span class="wall-cause">支持：兒童教育</span>
+          </div>
+          <div class="wall-item">
+            「願我們都有能力幫助別人。」
+            <span class="wall-cause">支持：長者關懷</span>
+          </div>
+        </div>
+        <p class="wall-disclaimer">此內容僅存在於本次 Demo 頁面，不會上傳伺服器。</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DEMO STATUS BANNER -->
+  <div class="demo-banner">
+    目前為互動 Demo，尚未連接實際金流。不進行真實付款與個人資料收集。
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-quote">「善意不是比較誰做得更多，而是我們願意一起做一點。」</div>
+      <p>© 福報金流 — 讓善意被看見的公益儀式</p>
+    </div>
+  </footer>
+
+  <!-- RITUAL ANIMATION OVERLAY -->
+  <div class="overlay-ritual" id="ritual-overlay">
+    <canvas class="particle-canvas" id="particle-canvas"></canvas>
+    
+    <div class="light-stage">
+      <div class="core-light"></div>
+      <svg class="lotus-glow" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 15C55 35 75 45 85 50C75 55 55 65 50 85C45 65 25 55 15 50C25 45 45 35 50 15Z" fill="url(#lotus-grad)" opacity="0.8"/>
+        <defs>
+          <radialGradient id="lotus-grad" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(35)">
+            <stop stop-color="#FFEAA7"/>
+            <stop offset="1" stop-color="#D4AF37" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="ritual-text-1">你的善意，已被記下。</div>
+    <div class="ritual-text-2">謝謝你，願意讓世界多一點溫柔。</div>
+    <div class="ritual-text-3">善意不是比較誰做得更多，而是我們願意一起做一點。</div>
+  </div>
+
+  <!-- ==========================================
+       JAVASCRIPT LOGIC
+       ========================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // State Management
+      const state = {
+        step: 1,
+        amount: 300,
+        cause: '弱勢家庭',
+        causeIcon: '🌱',
+        blessing: '',
+        customAmount: ''
+      };
+
+      // Elements
+      const stepNodes = [
+        document.getElementById('step-node-1'),
+        document.getElementById('step-node-2'),
+        document.getElementById('step-node-3'),
+        document.getElementById('step-node-4')
+      ];
+      const stepContents = [
+        document.getElementById('step-1'),
+        document.getElementById('step-2'),
+        document.getElementById('step-3'),
+        document.getElementById('step-4')
+      ];
+      const progressBar = document.getElementById('progress-bar');
+      const btnPrev = document.getElementById('btn-prev');
+      const btnNext = document.getElementById('btn-next');
+      
+      const amountBtns = document.querySelectorAll('.amount-btn');
+      const customWrap = document.getElementById('custom-wrap');
+      const customInput = document.getElementById('custom-amount-input');
+      
+      const causeCards = document.querySelectorAll('.cause-card');
+      const blessingInput = document.getElementById('blessing-input');
+      
+      const reviewAmount = document.getElementById('review-amount');
+      const reviewCause = document.getElementById('review-cause');
+      const reviewBlessing = document.getElementById('review-blessing');
+      
+      const ritualOverlay = document.getElementById('ritual-overlay');
+      const ritualCard = document.getElementById('ritual-card');
+      const imprintSection = document.getElementById('imprint-section');
+      
+      const resCause = document.getElementById('res-cause');
+      const resAmount = document.getElementById('res-amount');
+      const resBlessing = document.getElementById('res-blessing');
+      
+      const btnAddWall = document.getElementById('btn-add-wall');
+      const btnRestart = document.getElementById('btn-restart');
+      const wallList = document.getElementById('wall-list');
+      
+      const goalDemoNotice = document.getElementById('goal-demo-notice');
+      const noticeAmount = document.getElementById('notice-amount');
+
+      // Update UI for Steps
+      function updateStepUI() {
+        // Progress bar width
+        const progressPct = ((state.step - 1) / 3) * 100;
+        progressBar.style.width = `${progressPct}%`;
+
+        // Nodes
+        stepNodes.forEach((node, index) => {
+          const stepNum = index + 1;
+          node.classList.remove('active', 'completed');
+          if (stepNum === state.step) {
+            node.classList.add('active');
+          } else if (stepNum < state.step) {
+            node.classList.add('completed');
+          }
+        });
+
+        // Contents
+        stepContents.forEach((content, index) => {
+          content.classList.toggle('active', (index + 1) === state.step);
+        });
+
+        // Controls
+        btnPrev.style.visibility = state.step === 1 ? 'hidden' : 'visible';
+        
+        if (state.step === 4) {
+          btnNext.textContent = '完成善意';
+          btnNext.classList.add('btn-primary');
+          updateReviewCard();
+        } else {
+          btnNext.textContent = '下一步';
+        }
+      }
+
+      // Step 1: Amount Selection Logic
+      amountBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          amountBtns.forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+
+          const val = btn.getAttribute('data-value');
+          if (val === 'custom') {
+            customWrap.classList.add('active');
+            customInput.focus();
+            state.amount = parseInt(customInput.value, 10) || 0;
+          } else {
+            customWrap.classList.remove('active');
+            state.amount = parseInt(val, 10);
+          }
+        });
+      });
+
+      customInput.addEventListener('input', (e) => {
+        const val = parseInt(e.target.value, 10);
+        state.amount = (isNaN(val) || val <= 0) ? 0 : val;
+      });
+
+      // Step 2: Cause Selection Logic
+      causeCards.forEach(card => {
+        card.addEventListener('click', () => {
+          causeCards.forEach(c => c.classList.remove('selected'));
+          card.classList.add('selected');
+          state.cause = card.getAttribute('data-cause');
+          state.causeIcon = card.getAttribute('data-icon');
+        });
+      });
+
+      // Step 3: Blessing Text
+      blessingInput.addEventListener('input', (e) => {
+        state.blessing = e.target.value.trim();
+      });
+
+      // Step 4: Populate Review Card
+      function updateReviewCard() {
+        reviewAmount.textContent = `NT$ ${state.amount.toLocaleString()}`;
+        reviewCause.textContent = `支持：${state.cause}`;
+        if (state.blessing) {
+          reviewBlessing.textContent = `「${state.blessing}」`;
+        } else {
+          reviewBlessing.textContent = `「願這份心意，成為另一個人的一點力量。」`;
+        }
+      }
+
+      // Step Navigation Handlers
+      btnNext.addEventListener('click', () => {
+        // Validation for step 1
+        if (state.step === 1) {
+          if (!state.amount || state.amount <= 0) {
+            alert('請選擇或輸入有效的善意金額');
+            return;
+          }
+        }
+
+        if (state.step < 4) {
+          state.step++;
+          updateStepUI();
+        } else {
+          // Trigger Finish Ritual
+          triggerRitualAnimation();
+        }
+      });
+
+      btnPrev.addEventListener('click', () => {
+        if (state.step > 1) {
+          state.step--;
+          updateStepUI();
+        }
+      });
+
+      // RITUAL ANIMATION & OVERLAY
+      function triggerRitualAnimation() {
+        ritualOverlay.classList.add('active');
+        
+        // Check for reduced motion
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (!prefersReducedMotion) {
+          initParticles();
+        }
+
+        // Add class for timing animations
+        setTimeout(() => {
+          ritualOverlay.classList.add('animating');
+        }, 50);
+
+        // Transition to result after 4 seconds
+        setTimeout(() => {
+          ritualOverlay.classList.remove('active', 'animating');
+          showImprintResult();
+        }, 4200);
+      }
+
+      // Show final Imprint Card
+      function showImprintResult() {
+        ritualCard.style.display = 'none';
+        imprintSection.classList.add('active');
+
+        resCause.textContent = state.cause;
+        resAmount.textContent = `NT$ ${state.amount.toLocaleString()}`;
+        
+        const finalBlessing = state.blessing || '願你今天比昨天更有力量。';
+        resBlessing.textContent = `「${finalBlessing}」`;
+
+        // Update Goal Demo Notice
+        noticeAmount.textContent = `NT$ ${state.amount.toLocaleString()}`;
+        goalDemoNotice.classList.add('active');
+
+        // Scroll gracefully to result
+        imprintSection.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      // Add to Goodness Wall
+      btnAddWall.addEventListener('click', () => {
+        const blessingText = state.blessing || '願你今天比昨天更有力量。';
+        
+        const newItem = document.createElement('div');
+        newItem.className = 'wall-item';
+        newItem.style.animation = 'fadeIn 0.5s ease';
+        newItem.innerHTML = `
+          「${escapeHtml(blessingText)}」
+          <span class="wall-cause">支持：${escapeHtml(state.cause)}</span>
+        `;
+
+        wallList.prepend(newItem);
+        btnAddWall.disabled = true;
+        btnAddWall.textContent = '已放入善意牆';
+      });
+
+      // Restart Ritual
+      btnRestart.addEventListener('click', () => {
+        state.step = 1;
+        state.amount = 300;
+        state.cause = '弱勢家庭';
+        state.causeIcon = '🌱';
+        state.blessing = '';
+        
+        // Reset Inputs
+        blessingInput.value = '';
+        customInput.value = '';
+        customWrap.classList.remove('active');
+        
+        amountBtns.forEach(b => {
+          b.classList.toggle('selected', b.getAttribute('data-value') === '300');
+        });
+
+        causeCards.forEach(c => {
+          c.classList.toggle('selected', c.getAttribute('data-cause') === '弱勢家庭');
+        });
+
+        btnAddWall.disabled = false;
+        btnAddWall.textContent = '將我的祝福放入善意牆';
+
+        imprintSection.classList.remove('active');
+        ritualCard.style.display = 'block';
+        updateStepUI();
+
+        document.getElementById('ritual').scrollIntoView({ behavior: 'smooth' });
+      });
+
+      // Helper HTML Escaper
+      function escapeHtml(str) {
+        return str.replace(/[&<>"']/g, function(m) {
+          return {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+          }[m];
+        });
+      }
+
+      // Particle System for Ritual Overlay
+      function initParticles() {
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        const particles = [];
+        const particleCount = 40;
+
+        for (let i = 0; i < particleCount; i++) {
+          particles.push({
+            x: width / 2,
+            y: height / 2,
+            vx: (Math.random() - 0.5) * 3,
+            vy: (Math.random() - 0.5) * 3 - 0.5,
+            size: Math.random() * 3 + 1,
+            alpha: 1,
+            color: '#E6CA65'
+          });
+        }
+
+        let animId;
+        function render() {
+          ctx.clearRect(0, 0, width, height);
+
+          particles.forEach((p, index) => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.alpha -= 0.008;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(230, 202, 101, ${Math.max(p.alpha, 0)})`;
+            ctx.fill();
+
+            if (p.alpha <= 0) {
+              particles.splice(index, 1);
+            }
+          });
+
+          if (particles.length > 0) {
+            animId = requestAnimationFrame(render);
+          }
+        }
+
+        render();
+      }
+
+    });
+  </script>
+</body>
+</html>
