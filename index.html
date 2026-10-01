@@ -2,11 +2,11 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>福報金流 - 讓善意被看見的公益儀式</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>福報金流 - 心念漣漪公益儀式</title>
   <style>
     /* ==========================================
-       CSS RESET & VARIABLES
+       CSS VARIABLES & GLOBAL RESET
        ========================================== */
     :root {
       --bg-cream: #FDFBF7;
@@ -16,6 +16,7 @@
       --gold-primary: #D4AF37;
       --gold-soft: #E6CA65;
       --gold-light: #F9F3E3;
+      --gold-bright: #FFE89C;
       --accent-orange: #E07A5F;
       --accent-green: #2A9D8F;
       --accent-green-dark: #1E3F3A;
@@ -40,6 +41,8 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     html {
@@ -56,13 +59,10 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Ambient background graphics */
+    /* Ambient Background */
     .ambient-bg {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      top: 0; left: 0; width: 100vw; height: 100vh;
       pointer-events: none;
       z-index: 0;
       overflow: hidden;
@@ -77,19 +77,15 @@
     }
 
     .ambient-circle-1 {
-      width: 40vw;
-      height: 40vw;
+      width: 40vw; height: 40vw;
       background: var(--gold-soft);
-      top: -10vw;
-      right: -10vw;
+      top: -10vw; right: -10vw;
     }
 
     .ambient-circle-2 {
-      width: 50vw;
-      height: 50vw;
+      width: 50vw; height: 50vw;
       background: #F4A261;
-      bottom: -15vw;
-      left: -15vw;
+      bottom: -15vw; left: -15vw;
       animation-delay: -7s;
     }
 
@@ -99,7 +95,7 @@
     }
 
     /* ==========================================
-       TYPOGRAPHY & BASE COMPONENTS
+       TYPOGRAPHY & COMPONENTS
        ========================================== */
     h1, h2, h3, h4 {
       font-family: var(--font-serif);
@@ -130,7 +126,6 @@
       transition: var(--transition);
       text-decoration: none;
       outline: none;
-      user-select: none;
     }
 
     .btn-primary {
@@ -158,12 +153,6 @@
       transform: translateY(-2px);
     }
 
-    .btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none !important;
-    }
-
     .badge {
       display: inline-block;
       padding: 0.25rem 0.75rem;
@@ -172,11 +161,9 @@
       font-size: 0.85rem;
       font-weight: 500;
       border-radius: var(--radius-full);
-      margin-bottom: 1rem;
       border: 1px solid rgba(212, 175, 55, 0.2);
     }
 
-    /* Header Nav */
     header {
       padding: 1.5rem 0;
       display: flex;
@@ -196,8 +183,7 @@
     }
 
     .logo-icon {
-      width: 36px;
-      height: 36px;
+      width: 36px; height: 36px;
       background: linear-gradient(135deg, var(--gold-primary), var(--accent-orange));
       border-radius: 50%;
       display: flex;
@@ -208,23 +194,22 @@
     }
 
     /* ==========================================
-       SECTION 1: HERO
+       HERO SECTION
        ========================================== */
     .hero {
-      min-height: 80vh;
+      min-height: 75vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 4rem 0 6rem 0;
+      padding: 3rem 0 5rem 0;
     }
 
     .hero-title {
       font-size: clamp(2.5rem, 6vw, 4rem);
       line-height: 1.25;
       margin-bottom: 1.25rem;
-      letter-spacing: -0.02em;
     }
 
     .hero-subtitle {
@@ -237,8 +222,7 @@
 
     .hero-graphic {
       position: relative;
-      width: 120px;
-      height: 120px;
+      width: 120px; height: 120px;
       margin-bottom: 2rem;
       display: flex;
       align-items: center;
@@ -275,10 +259,10 @@
     }
 
     /* ==========================================
-       SECTION 2: RITUAL (DONATION STEPS)
+       RITUAL SECTION (UI/UX DONATION FLOW)
        ========================================== */
     .ritual-section {
-      padding: 4rem 0;
+      padding: 2rem 0;
     }
 
     .ritual-card {
@@ -288,10 +272,8 @@
       border: 1px solid var(--border-color);
       padding: 2.5rem;
       position: relative;
-      overflow: hidden;
     }
 
-    /* Step indicator */
     .step-indicator {
       display: flex;
       justify-content: space-between;
@@ -302,9 +284,7 @@
     .step-indicator::before {
       content: '';
       position: absolute;
-      top: 18px;
-      left: 0;
-      right: 0;
+      top: 18px; left: 0; right: 0;
       height: 2px;
       background: var(--border-color);
       z-index: 0;
@@ -312,8 +292,7 @@
 
     .step-progress-bar {
       position: absolute;
-      top: 18px;
-      left: 0;
+      top: 18px; left: 0;
       height: 2px;
       background: var(--gold-primary);
       z-index: 0;
@@ -333,8 +312,7 @@
     }
 
     .step-num {
-      width: 36px;
-      height: 36px;
+      width: 36px; height: 36px;
       border-radius: 50%;
       background: #FFFFFF;
       border: 2px solid var(--border-color);
@@ -370,7 +348,6 @@
       font-weight: 600;
     }
 
-    /* Steps Content Container */
     .step-content {
       display: none;
       animation: fadeIn 0.4s ease forwards;
@@ -398,7 +375,7 @@
       font-size: 0.95rem;
     }
 
-    /* STEP 1: Amount selection */
+    /* STEP 1: Amount */
     .amount-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
@@ -450,8 +427,7 @@
 
     .input-prefix {
       position: absolute;
-      left: 1rem;
-      top: 50%;
+      left: 1rem; top: 50%;
       transform: translateY(-50%);
       font-weight: 600;
       color: var(--text-muted);
@@ -472,7 +448,7 @@
       box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
     }
 
-    /* STEP 2: Cause selection */
+    /* STEP 2: Cause */
     .cause-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -505,17 +481,10 @@
       box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.15);
     }
 
-    .cause-icon {
-      font-size: 1.8rem;
-    }
+    .cause-icon { font-size: 1.8rem; }
+    .cause-title { font-weight: 600; color: var(--text-dark); font-size: 1rem; }
 
-    .cause-title {
-      font-weight: 600;
-      color: var(--text-dark);
-      font-size: 1rem;
-    }
-
-    /* STEP 3: Blessing Message */
+    /* STEP 3: Blessing */
     .textarea-wrap {
       max-width: 550px;
       margin: 0 auto 1.5rem auto;
@@ -561,10 +530,7 @@
     .intention-card::before {
       content: '';
       position: absolute;
-      top: 8px;
-      left: 8px;
-      right: 8px;
-      bottom: 8px;
+      top: 8px; left: 8px; right: 8px; bottom: 8px;
       border: 1px dashed rgba(212, 175, 55, 0.3);
       border-radius: calc(var(--radius-md) - 4px);
       pointer-events: none;
@@ -603,11 +569,9 @@
       color: var(--text-dark);
       font-size: 1.05rem;
       line-height: 1.6;
-      position: relative;
       padding: 0 1rem;
     }
 
-    /* Ritual Controls */
     .ritual-controls {
       display: flex;
       justify-content: space-between;
@@ -618,137 +582,258 @@
     }
 
     /* ==========================================
-       SECTION 3: RITUAL ANIMATION OVERLAY
+       SECTION: POND GAME (心念漣漪遊戲)
        ========================================== */
-    .overlay-ritual {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(18, 28, 26, 0.92);
-      backdrop-filter: blur(12px);
-      z-index: 1000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.8s ease;
-      color: #FFFFFF;
-      padding: 2rem;
-      text-align: center;
+    .game-section {
+      display: none;
+      padding: 2rem 0;
+      animation: fadeIn 0.8s ease;
     }
 
-    .overlay-ritual.active {
+    .game-section.active {
+      display: block;
+    }
+
+    .app-viewport {
+      position: relative;
+      width: 100%;
+      height: 75vh;
+      max-height: 680px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+      background: #000;
+    }
+
+    canvas#pondCanvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 1;
+      cursor: pointer;
+    }
+
+    .viewport-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 2;
+      background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 40%, rgba(3,8,6,0.85) 100%);
+      pointer-events: none;
+    }
+
+    .status-bar {
+      position: absolute;
+      top: 20px; left: 24px; right: 24px;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: none;
+    }
+
+    .brand-tag {
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+      color: var(--gold-bright);
+      font-weight: 600;
+      text-shadow: 0 0 12px rgba(212,175,55,0.5);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-tag::before {
+      content: '';
+      display: inline-block;
+      width: 8px; height: 8px;
+      background: var(--gold-bright);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--gold-bright);
+    }
+
+    .counter-badge {
+      background: rgba(23, 56, 47, 0.5);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .interaction-guide {
+      position: absolute;
+      bottom: 30px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      text-align: center;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .guide-main-text {
+      font-size: 1.1rem;
+      letter-spacing: 1.5px;
+      color: #FFF;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+      margin-bottom: 4px;
+    }
+
+    .guide-sub-text {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .charge-ring-container {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 140px; height: 140px;
+      z-index: 5;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .charge-ring-svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .charge-ring-circle {
+      fill: none;
+      stroke: var(--gold-bright);
+      stroke-width: 4;
+      stroke-dasharray: 400;
+      stroke-dashoffset: 400;
+      filter: drop-shadow(0 0 10px var(--gold-primary));
+      transition: stroke-dashoffset 0.05s linear;
+    }
+
+    .coin-element {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      z-index: 6;
+      background: radial-gradient(circle at 35% 35%, #FFFDF0 0%, #FFE58F 30%, #D4AF37 65%, #634C0E 100%);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.7), inset 0 2px 3px rgba(255,255,255,0.9), inset 0 -4px 6px rgba(0,0,0,0.6);
+      border: 3px solid #FFE89C;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.1s cubic-bezier(0.1, 1, 0.1, 1), box-shadow 0.3s;
+    }
+
+    .coin-element::after {
+      content: '善';
+      font-size: 2.8rem;
+      font-weight: 800;
+      background: linear-gradient(180deg, #4A3A0B 0%, #1F1703 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0px 1px 1px rgba(255, 245, 200, 0.8));
+    }
+
+    .coin-element.charging {
+      box-shadow: 0 0 30px var(--gold-bright), 0 0 60px var(--gold-primary), inset 0 2px 3px #FFF;
+    }
+
+    /* Result Mind Card Overlay */
+    .mind-card {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -40%) scale(0.85);
+      width: 90%;
+      max-width: 420px;
+      background: rgba(10, 28, 22, 0.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 232, 156, 0.3);
+      border-radius: 24px;
+      padding: 30px 24px;
+      z-index: 20;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.9);
+      color: #FFF;
+    }
+
+    .mind-card.active {
       opacity: 1;
       pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1);
     }
 
-    .light-stage {
-      position: relative;
-      width: 200px;
-      height: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 2rem;
+    .card-tag {
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      color: var(--gold-bright);
+      margin-bottom: 12px;
     }
 
-    .core-light {
-      width: 12px;
-      height: 12px;
-      background: #FFF;
-      border-radius: 50%;
-      box-shadow: 0 0 20px 10px rgba(255, 235, 170, 0.9);
-      transform: scale(0.1);
-      transition: transform 2.5s ease-out;
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #FFF;
+      margin-bottom: 12px;
     }
 
-    .overlay-ritual.animating .core-light {
-      transform: scale(3.5);
-    }
-
-    .lotus-glow {
-      position: absolute;
-      width: 140px;
-      height: 140px;
-      opacity: 0;
-      transform: scale(0.6);
-      transition: all 2s ease 1s;
-    }
-
-    .overlay-ritual.animating .lotus-glow {
-      opacity: 0.85;
-      transform: scale(1);
-    }
-
-    .particle-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-    }
-
-    .ritual-text-1 {
-      font-family: var(--font-serif);
-      font-size: 1.8rem;
-      color: var(--gold-soft);
-      margin-bottom: 0.75rem;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: all 1s ease 1.5s;
-    }
-
-    .ritual-text-2 {
-      font-size: 1.1rem;
-      color: #E2E8F0;
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: all 1s ease 2.3s;
+    .card-body {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.85);
+      white-space: pre-line;
+      margin-bottom: 24px;
       font-weight: 300;
     }
 
-    .ritual-text-3 {
+    .card-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-action-primary {
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #FFE89C 0%, #D4AF37 100%);
+      color: #1A1303;
       font-size: 0.95rem;
-      color: var(--gold-soft);
-      opacity: 0;
-      transition: opacity 1s ease 3.1s;
-      max-width: 480px;
-      line-height: 1.8;
-      border-top: 1px solid rgba(255,255,255,0.15);
-      padding-top: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(212,175,55,0.3);
+      transition: var(--transition);
     }
 
-    .overlay-ritual.animating .ritual-text-1,
-    .overlay-ritual.animating .ritual-text-2,
-    .overlay-ritual.animating .ritual-text-3 {
-      opacity: 1;
-      transform: translateY(0);
+    .btn-action-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(212,175,55,0.45);
     }
 
-    /* Reduced Motion fallback */
-    @media (prefers-reduced-motion: reduce) {
-      .core-light, .lotus-glow, .ritual-text-1, .ritual-text-2, .ritual-text-3 {
-        transition: opacity 0.5s ease !important;
-        transform: none !important;
-      }
-      .overlay-ritual.animating .core-light { transform: none; opacity: 1; }
-      .overlay-ritual.animating .lotus-glow { transform: none; opacity: 1; }
-      .ripple-ring { animation: none; opacity: 0.2; }
-      .drop-icon { animation: none; }
+    .btn-action-secondary {
+      padding: 10px 24px;
+      background: transparent;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.85rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-action-secondary:hover {
+      background: rgba(255,255,255,0.05);
+      color: #FFF;
     }
 
     /* ==========================================
-       SECTION 4: IMPRINT RESULT CARD
+       IMPRINT RESULT SECTION
        ========================================== */
     .imprint-section {
       display: none;
-      padding: 3rem 0;
+      padding: 2rem 0;
       animation: fadeIn 0.8s ease;
     }
 
@@ -765,7 +850,6 @@
       padding: 2.5rem 2rem;
       box-shadow: var(--shadow-lg);
       text-align: center;
-      position: relative;
     }
 
     .imprint-card-header {
@@ -776,8 +860,7 @@
     }
 
     .imprint-divider {
-      width: 40px;
-      height: 2px;
+      width: 40px; height: 2px;
       background: var(--gold-primary);
       margin: 1rem auto;
     }
@@ -804,18 +887,9 @@
       font-size: 0.95rem;
     }
 
-    .imprint-row:last-child {
-      margin-bottom: 0;
-    }
-
-    .imprint-label {
-      color: var(--text-muted);
-    }
-
-    .imprint-val {
-      font-weight: 600;
-      color: var(--text-dark);
-    }
+    .imprint-row:last-child { margin-bottom: 0; }
+    .imprint-label { color: var(--text-muted); }
+    .imprint-val { font-weight: 600; color: var(--text-dark); }
 
     .imprint-blessing-box {
       font-family: var(--font-serif);
@@ -841,7 +915,7 @@
     }
 
     /* ==========================================
-       SECTION 5: GOAL PROGRESS & WALL
+       DASHBOARD & WALL
        ========================================== */
     .dashboard-grid {
       display: grid;
@@ -851,9 +925,7 @@
     }
 
     @media (min-width: 768px) {
-      .dashboard-grid {
-        grid-template-columns: 1fr 1fr;
-      }
+      .dashboard-grid { grid-template-columns: 1fr 1fr; }
     }
 
     .dash-card {
@@ -882,7 +954,6 @@
       font-weight: normal;
     }
 
-    /* Progress bar */
     .goal-values {
       display: flex;
       justify-content: space-between;
@@ -897,14 +968,10 @@
       font-family: var(--font-serif);
     }
 
-    .goal-target {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
+    .goal-target { font-size: 0.9rem; color: var(--text-muted); }
 
     .progress-track {
-      width: 100%;
-      height: 12px;
+      width: 100%; height: 12px;
       background: var(--bg-card);
       border-radius: var(--radius-full);
       overflow: hidden;
@@ -929,11 +996,8 @@
       animation: fadeIn 0.4s ease;
     }
 
-    .goal-notice.active {
-      display: block;
-    }
+    .goal-notice.active { display: block; }
 
-    /* Wall list */
     .wall-list {
       display: flex;
       flex-direction: column;
@@ -965,9 +1029,6 @@
       text-align: center;
     }
 
-    /* ==========================================
-       SECTION 6: FOOTER & DEMO BANNER
-       ========================================== */
     .demo-banner {
       background: #FFFBEB;
       border-top: 1px solid #FCD34D;
@@ -994,64 +1055,37 @@
       font-size: 1.1rem;
     }
 
-    /* ==========================================
-       RESPONSIVE DESIGN (MOBILE FIRST OVERRIDES)
-       ========================================== */
     @media (max-width: 640px) {
-      .ritual-card {
-        padding: 1.5rem 1rem;
-      }
-
-      .step-label {
-        display: none;
-      }
-
-      .step-indicator {
-        margin-bottom: 2rem;
-      }
-
-      .amount-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .cause-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .ritual-controls {
-        flex-direction: column-reverse;
-        gap: 0.75rem;
-      }
-
-      .ritual-controls .btn {
-        width: 100%;
-      }
-
-      .hero-title {
-        font-size: 2.2rem;
-      }
-
-      .card-amount-display {
-        font-size: 1.8rem;
-      }
+      .ritual-card { padding: 1.5rem 1rem; }
+      .step-label { display: none; }
+      .step-indicator { margin-bottom: 2rem; }
+      .amount-grid { grid-template-columns: repeat(2, 1fr); }
+      .cause-grid { grid-template-columns: 1fr; }
+      .ritual-controls { flex-direction: column-reverse; gap: 0.75rem; }
+      .ritual-controls .btn { width: 100%; }
+      .hero-title { font-size: 2.2rem; }
+      .card-amount-display { font-size: 1.8rem; }
+      .app-viewport { height: 80vh; }
+      .coin-element { width: 90px; height: 90px; }
+      .coin-element::after { font-size: 2.2rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Ambient Light Background -->
+  <!-- Background Ambient Glow -->
   <div class="ambient-bg">
     <div class="ambient-circle ambient-circle-1"></div>
     <div class="ambient-circle ambient-circle-2"></div>
   </div>
 
-  <!-- Global Header -->
+  <!-- Header -->
   <header class="container">
     <a href="#" class="logo">
       <div class="logo-icon">福</div>
       <span>福報金流</span>
     </a>
-    <span class="badge">公益互動體驗</span>
+    <span class="badge">公益互動儀式體驗</span>
   </header>
 
   <!-- Hero Section -->
@@ -1064,16 +1098,14 @@
     </div>
     <h1 class="hero-title">讓善意，留下痕跡。</h1>
     <p class="hero-subtitle">每一份心意，都可以成為支持他人的力量。在這裡，我們用透明與真誠，記錄點滴匯聚的溫暖。</p>
-    <a href="#ritual" class="btn btn-primary">開始一場善意</a>
+    <a href="#ritual" class="btn btn-primary">開始一場善意儀式</a>
   </section>
 
-  <!-- Interactive Ritual Section -->
+  <!-- Interactive Donation Ritual Flow -->
   <section id="ritual" class="ritual-section container">
     
-    <!-- STEP PROCESSOR -->
     <div class="ritual-card" id="ritual-card">
-      
-      <!-- Progress Indicator -->
+      <!-- Progress Bar -->
       <div class="step-indicator">
         <div class="step-progress-bar" id="progress-bar"></div>
         <div class="step-item active" id="step-node-1">
@@ -1154,10 +1186,10 @@
         </div>
       </div>
 
-      <!-- STEP 4: Review Intention Card -->
+      <!-- STEP 4: Review Card -->
       <div class="step-content" id="step-4">
         <h2 class="step-title">準備完成你的善意</h2>
-        <p class="step-subtitle">檢視你的善意卡片，這將是一份專屬於你的溫暖紀錄。</p>
+        <p class="step-subtitle">檢視你的善意卡片，接下來將進入心念沉澱儀式。</p>
         
         <div class="preview-card-wrap">
           <div class="intention-card">
@@ -1179,7 +1211,46 @@
 
     </div>
 
-    <!-- IMPRINT RESULT SECTION (Shown after ritual) -->
+    <!-- POND GAME SECTION (心念漣漪遊戲互動) -->
+    <div class="game-section" id="game-section">
+      <div class="app-viewport" id="viewport">
+        <canvas id="pondCanvas"></canvas>
+        <div class="viewport-overlay"></div>
+
+        <div class="status-bar">
+          <div class="brand-tag">心念漣漪儀式</div>
+          <div class="counter-badge" id="rippleCounter">心念池已收納 1,284 抹善意</div>
+        </div>
+
+        <div class="charge-ring-container" id="chargeContainer">
+          <svg class="charge-ring-svg">
+            <circle class="charge-ring-circle" id="chargeCircle" cx="70" cy="70" r="60"></circle>
+          </svg>
+        </div>
+
+        <div class="coin-element" id="coinBtn"></div>
+
+        <div class="interaction-guide" id="guideText">
+          <div class="guide-main-text" id="mainGuide">長按善意硬幣 注入祝福心念</div>
+          <div class="guide-sub-text" id="subGuide">蓄力越久，水面迴響越深</div>
+        </div>
+
+        <!-- Result Card inside Game -->
+        <div class="mind-card" id="mindCard">
+          <div class="card-tag" id="cardTag">ECHO OF MIND</div>
+          <div class="card-title" id="cardTitle">水面異象：金光爆發</div>
+          <div class="card-body" id="cardBody">
+            當你停止焦慮未來，
+            當下的平靜便會如漣漪般擴散。
+          </div>
+          <div class="card-actions">
+            <button class="btn-action-primary" id="btn-game-finish">領取善意印記卡</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IMPRINT RESULT SECTION -->
     <div class="imprint-section" id="imprint-section">
       <div class="imprint-card">
         <h2 class="imprint-card-header">今日善意印記</h2>
@@ -1205,14 +1276,14 @@
 
         <div class="imprint-actions">
           <button type="button" class="btn btn-primary" id="btn-add-wall">將我的祝福放入善意牆</button>
-          <button type="button" class="btn btn-secondary" id="btn-restart">重新開始</button>
+          <button type="button" class="btn btn-secondary" id="btn-restart">重新體驗儀式</button>
         </div>
       </div>
     </div>
 
   </section>
 
-  <!-- DASHBOARD: GOAL PROGRESS & GOODNESS WALL -->
+  <!-- DASHBOARD: GOAL PROGRESS & WALL -->
   <section class="container">
     <div class="dashboard-grid">
       
@@ -1264,7 +1335,7 @@
     </div>
   </section>
 
-  <!-- DEMO STATUS BANNER -->
+  <!-- DEMO BANNER -->
   <div class="demo-banner">
     目前為互動 Demo，尚未連接實際金流。不進行真實付款與個人資料收集。
   </div>
@@ -1276,28 +1347,6 @@
       <p>© 福報金流 — 讓善意被看見的公益儀式</p>
     </div>
   </footer>
-
-  <!-- RITUAL ANIMATION OVERLAY -->
-  <div class="overlay-ritual" id="ritual-overlay">
-    <canvas class="particle-canvas" id="particle-canvas"></canvas>
-    
-    <div class="light-stage">
-      <div class="core-light"></div>
-      <svg class="lotus-glow" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M50 15C55 35 75 45 85 50C75 55 55 65 50 85C45 65 25 55 15 50C25 45 45 35 50 15Z" fill="url(#lotus-grad)" opacity="0.8"/>
-        <defs>
-          <radialGradient id="lotus-grad" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(50 50) rotate(90) scale(35)">
-            <stop stop-color="#FFEAA7"/>
-            <stop offset="1" stop-color="#D4AF37" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
-      </svg>
-    </div>
-
-    <div class="ritual-text-1">你的善意，已被記下。</div>
-    <div class="ritual-text-2">謝謝你，願意讓世界多一點溫柔。</div>
-    <div class="ritual-text-3">善意不是比較誰做得更多，而是我們願意一起做一點。</div>
-  </div>
 
   <!-- ==========================================
        JAVASCRIPT LOGIC
@@ -1312,10 +1361,15 @@
         cause: '弱勢家庭',
         causeIcon: '🌱',
         blessing: '',
-        customAmount: ''
+        isCharging: false,
+        chargeProgress: 0,
+        chargeTimer: null,
+        isAnimating: false,
+        totalRipples: 1284,
+        cameraZoom: 1
       };
 
-      // Elements
+      // UI Controls Elements
       const stepNodes = [
         document.getElementById('step-node-1'),
         document.getElementById('step-node-2'),
@@ -1343,8 +1397,8 @@
       const reviewCause = document.getElementById('review-cause');
       const reviewBlessing = document.getElementById('review-blessing');
       
-      const ritualOverlay = document.getElementById('ritual-overlay');
       const ritualCard = document.getElementById('ritual-card');
+      const gameSection = document.getElementById('game-section');
       const imprintSection = document.getElementById('imprint-section');
       
       const resCause = document.getElementById('res-cause');
@@ -1358,41 +1412,33 @@
       const goalDemoNotice = document.getElementById('goal-demo-notice');
       const noticeAmount = document.getElementById('notice-amount');
 
-      // Update UI for Steps
+      // Update Step UI
       function updateStepUI() {
-        // Progress bar width
         const progressPct = ((state.step - 1) / 3) * 100;
         progressBar.style.width = `${progressPct}%`;
 
-        // Nodes
         stepNodes.forEach((node, index) => {
           const stepNum = index + 1;
           node.classList.remove('active', 'completed');
-          if (stepNum === state.step) {
-            node.classList.add('active');
-          } else if (stepNum < state.step) {
-            node.classList.add('completed');
-          }
+          if (stepNum === state.step) node.classList.add('active');
+          else if (stepNum < state.step) node.classList.add('completed');
         });
 
-        // Contents
         stepContents.forEach((content, index) => {
           content.classList.toggle('active', (index + 1) === state.step);
         });
 
-        // Controls
         btnPrev.style.visibility = state.step === 1 ? 'hidden' : 'visible';
         
         if (state.step === 4) {
-          btnNext.textContent = '完成善意';
-          btnNext.classList.add('btn-primary');
+          btnNext.textContent = '進入投擲儀式';
           updateReviewCard();
         } else {
           btnNext.textContent = '下一步';
         }
       }
 
-      // Step 1: Amount Selection Logic
+      // Step 1: Amount Selection
       amountBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           amountBtns.forEach(b => b.classList.remove('selected'));
@@ -1415,7 +1461,7 @@
         state.amount = (isNaN(val) || val <= 0) ? 0 : val;
       });
 
-      // Step 2: Cause Selection Logic
+      // Step 2: Cause Selection
       causeCards.forEach(card => {
         card.addEventListener('click', () => {
           causeCards.forEach(c => c.classList.remove('selected'));
@@ -1430,33 +1476,28 @@
         state.blessing = e.target.value.trim();
       });
 
-      // Step 4: Populate Review Card
       function updateReviewCard() {
         reviewAmount.textContent = `NT$ ${state.amount.toLocaleString()}`;
         reviewCause.textContent = `支持：${state.cause}`;
-        if (state.blessing) {
-          reviewBlessing.textContent = `「${state.blessing}」`;
-        } else {
-          reviewBlessing.textContent = `「願這份心意，成為另一個人的一點力量。」`;
-        }
+        reviewBlessing.textContent = state.blessing ? `「${state.blessing}」` : `「願這份心意，成為另一個人的一點力量。」`;
       }
 
-      // Step Navigation Handlers
+      // Navigation Handlers
       btnNext.addEventListener('click', () => {
-        // Validation for step 1
-        if (state.step === 1) {
-          if (!state.amount || state.amount <= 0) {
-            alert('請選擇或輸入有效的善意金額');
-            return;
-          }
+        if (state.step === 1 && (!state.amount || state.amount <= 0)) {
+          alert('請選擇或輸入有效的善意金額');
+          return;
         }
 
         if (state.step < 4) {
           state.step++;
           updateStepUI();
         } else {
-          // Trigger Finish Ritual
-          triggerRitualAnimation();
+          // Enter Game Ritual
+          ritualCard.style.display = 'none';
+          gameSection.classList.add('active');
+          resizeCanvas();
+          gameSection.scrollIntoView({ behavior: 'smooth' });
         }
       });
 
@@ -1467,32 +1508,274 @@
         }
       });
 
-      // RITUAL ANIMATION & OVERLAY
-      function triggerRitualAnimation() {
-        ritualOverlay.classList.add('active');
-        
-        // Check for reduced motion
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      // ==========================================================================
+      // POND CANVAS GAME ENGINE
+      // ==========================================================================
+      const viewport = document.getElementById('viewport');
+      const canvas = document.getElementById('pondCanvas');
+      const ctx = canvas.getContext('2d');
+      const coinBtn = document.getElementById('coinBtn');
+      const chargeContainer = document.getElementById('chargeContainer');
+      const chargeCircle = document.getElementById('chargeCircle');
+      const guideText = document.getElementById('guideText');
+      const mainGuide = document.getElementById('mainGuide');
+      const subGuide = document.getElementById('subGuide');
+      const mindCard = document.getElementById('mindCard');
+      const cardTag = document.getElementById('cardTag');
+      const cardTitle = document.getElementById('cardTitle');
+      const cardBody = document.getElementById('cardBody');
+      const btnGameFinish = document.getElementById('btn-game-finish');
+      const rippleCounter = document.getElementById('rippleCounter');
 
-        if (!prefersReducedMotion) {
-          initParticles();
-        }
+      function resizeCanvas() {
+        if (!canvas) return;
+        canvas.width = viewport.clientWidth;
+        canvas.height = viewport.clientHeight;
+      }
+      window.addEventListener('resize', resizeCanvas);
 
-        // Add class for timing animations
-        setTimeout(() => {
-          ritualOverlay.classList.add('animating');
-        }, 50);
+      let ripples = [];
+      let particles = [];
+      let fireflies = [];
+      let currentPhenomenon = null;
 
-        // Transition to result after 4 seconds
-        setTimeout(() => {
-          ritualOverlay.classList.remove('active', 'animating');
-          showImprintResult();
-        }, 4200);
+      for (let i = 0; i < 30; i++) {
+        fireflies.push({
+          x: Math.random() * (canvas.width || 800),
+          y: Math.random() * (canvas.height || 600),
+          r: Math.random() * 2 + 1,
+          alpha: Math.random(),
+          dx: (Math.random() - 0.5) * 0.4,
+          dy: -Math.random() * 0.3 - 0.1
+        });
       }
 
-      // Show final Imprint Card
-      function showImprintResult() {
-        ritualCard.style.display = 'none';
+      function spawnRipple(x, y, maxR = 120, color = 'rgba(136, 234, 216, ') {
+        ripples.push({ x, y, r: 2, maxR, alpha: 1, color });
+      }
+
+      function spawnParticles(x, y, count = 40, speedScale = 1, goldOnly = false) {
+        for (let i = 0; i < count; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = (Math.random() * 3 + 1) * speedScale;
+          particles.push({
+            x, y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            r: Math.random() * 2.5 + 1,
+            alpha: 1,
+            decay: Math.random() * 0.015 + 0.008,
+            isGold: goldOnly || Math.random() > 0.4
+          });
+        }
+      }
+
+      function render() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.save();
+        if (state.cameraZoom > 1) {
+          ctx.translate(canvas.width / 2, canvas.height / 2);
+          ctx.scale(state.cameraZoom, state.cameraZoom);
+          ctx.translate(-canvas.width / 2, -canvas.height / 2);
+        }
+
+        const grad = ctx.createRadialGradient(
+          canvas.width / 2, canvas.height / 2, 20,
+          canvas.width / 2, canvas.height / 2, canvas.width * 0.7
+        );
+        grad.addColorStop(0, '#112C24');
+        grad.addColorStop(0.7, '#071410');
+        grad.addColorStop(1, '#030806');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        if (currentPhenomenon) {
+          currentPhenomenon.draw(ctx);
+        }
+
+        ripples.forEach((r, idx) => {
+          ctx.beginPath();
+          ctx.arc(r.x, r.y, r.r, 0, Math.PI * 2);
+          ctx.strokeStyle = `${r.color}${r.alpha})`;
+          ctx.lineWidth = 2;
+          ctx.stroke();
+
+          r.r += (r.maxR - r.r) * 0.04 + 0.5;
+          r.alpha -= 0.01;
+          if (r.alpha <= 0) ripples.splice(idx, 1);
+        });
+
+        particles.forEach((p, idx) => {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = p.isGold 
+            ? `rgba(255, 232, 156, ${p.alpha})`
+            : `rgba(136, 234, 216, ${p.alpha})`;
+          ctx.fill();
+
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vx *= 0.96;
+          p.vy *= 0.96;
+          p.alpha -= p.decay;
+
+          if (p.alpha <= 0) particles.splice(idx, 1);
+        });
+
+        fireflies.forEach(f => {
+          ctx.beginPath();
+          ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 232, 156, ${f.alpha * 0.6})`;
+          ctx.fill();
+
+          f.x += f.dx;
+          f.y += f.dy;
+          if (f.y < 0) f.y = canvas.height;
+          if (f.x < 0) f.x = canvas.width;
+          if (f.x > canvas.width) f.x = 0;
+        });
+
+        ctx.restore();
+        requestAnimationFrame(render);
+      }
+      requestAnimationFrame(render);
+
+      // Dynamic Mind Database adapting to User's Blessing
+      function getMindDatabase() {
+        const userText = state.blessing || '願這份心意，成為另一個人的一點力量。';
+        return [
+          {
+            tag: 'PHENOMENON: GOLDEN BURST',
+            title: '✨ 湖心金芒爆發',
+            body: `「${userText}」\n\n這份專注與善意，已化為澄澈的光芒，點亮水面。`,
+            phenomenon: (x, y) => {
+              spawnParticles(x, y, 70, 1.8, true);
+              spawnRipple(x, y, 220, 'rgba(255, 232, 156, ');
+            }
+          },
+          {
+            tag: 'PHENOMENON: LOTUS BLOOM',
+            title: '🌸 水面清蓮靜綻',
+            body: `「${userText}」\n\n急躁無法讓花朵提前開放。允許一切按照本身的節奏，優雅發生。`,
+            phenomenon: (x, y) => {
+              let bloomProgress = 0;
+              currentPhenomenon = {
+                draw: (c) => {
+                  if (bloomProgress < 1) bloomProgress += 0.02;
+                  c.save();
+                  c.translate(x, y);
+                  for (let i = 0; i < 8; i++) {
+                    c.rotate((Math.PI * 2) / 8);
+                    c.beginPath();
+                    c.moveTo(0, 0);
+                    c.quadraticCurveTo(15, -30 * bloomProgress, 0, -50 * bloomProgress);
+                    c.quadraticCurveTo(-15, -30 * bloomProgress, 0, 0);
+                    c.fillStyle = `rgba(255, 192, 211, ${0.7 * bloomProgress})`;
+                    c.fill();
+                  }
+                  c.restore();
+                }
+              };
+              spawnRipple(x, y, 160, 'rgba(255, 192, 211, ');
+            }
+          }
+        ];
+      }
+
+      // Charging Controls
+      function startCharging(e) {
+        if (state.isAnimating) return;
+        e.preventDefault();
+
+        state.isCharging = true;
+        state.chargeProgress = 0;
+        coinBtn.classList.add('charging');
+        chargeContainer.style.opacity = '1';
+
+        mainGuide.textContent = '凝聚善意祝福……';
+        subGuide.textContent = '放開手，將心念投沉水底';
+
+        const startTime = Date.now();
+        state.chargeTimer = setInterval(() => {
+          const elapsed = Date.now() - startTime;
+          state.chargeProgress = Math.min(1, elapsed / 1600);
+
+          const offset = 400 - (state.chargeProgress * 400);
+          chargeCircle.style.strokeDashoffset = offset;
+
+          const jitter = state.chargeProgress * 4;
+          const rx = (Math.random() - 0.5) * jitter;
+          const ry = (Math.random() - 0.5) * jitter;
+          const scale = 1 + state.chargeProgress * 0.15;
+          coinBtn.style.transform = `translate(calc(-50% + ${rx}px), calc(-50% + ${ry}px)) scale(${scale})`;
+
+          if (Math.random() < state.chargeProgress * 0.8) {
+            const rect = coinBtn.getBoundingClientRect();
+            const vpRect = viewport.getBoundingClientRect();
+            const cx = rect.left - vpRect.left + rect.width / 2;
+            const cy = rect.top - vpRect.top + rect.height / 2;
+            spawnParticles(cx, cy, 2, 0.5, true);
+          }
+        }, 30);
+      }
+
+      async function releaseAndToss(e) {
+        if (!state.isCharging || state.isAnimating) return;
+        state.isCharging = false;
+        clearInterval(state.chargeTimer);
+        coinBtn.classList.remove('charging');
+        chargeContainer.style.opacity = '0';
+
+        state.isAnimating = true;
+
+        const targetX = canvas.width / 2;
+        const targetY = canvas.height / 2 + 30;
+
+        guideText.style.opacity = '0';
+        state.cameraZoom = 1.08;
+
+        coinBtn.style.transition = 'all 0.9s cubic-bezier(0.25, 1, 0.5, 1)';
+        coinBtn.style.transform = 'translate(-50%, -250%) scale(0.5)';
+        coinBtn.style.opacity = '0.8';
+
+        await sleep(400);
+
+        coinBtn.style.transition = 'all 0.6s cubic-bezier(0.5, 0, 0.75, 0)';
+        coinBtn.style.transform = `translate(-50%, 40px) scale(0.1)`;
+        coinBtn.style.opacity = '0';
+
+        await sleep(550);
+
+        state.cameraZoom = 1;
+        currentPhenomenon = null;
+
+        const db = getMindDatabase();
+        const item = db[Math.floor(Math.random() * db.length)];
+        item.phenomenon(targetX, targetY);
+
+        state.totalRipples++;
+        rippleCounter.textContent = `心念池已收納 ${state.totalRipples.toLocaleString()} 抹善意`;
+
+        await sleep(1000);
+
+        cardTag.textContent = item.tag;
+        cardTitle.textContent = item.title;
+        cardBody.textContent = item.body;
+        mindCard.classList.add('active');
+      }
+
+      function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+      coinBtn.addEventListener('mousedown', startCharging);
+      window.addEventListener('mouseup', releaseAndToss);
+
+      coinBtn.addEventListener('touchstart', startCharging, { passive: false });
+      window.addEventListener('touchend', releaseAndToss);
+
+      // Finish Game & Proceed to Result Imprint
+      btnGameFinish.addEventListener('click', () => {
+        gameSection.classList.remove('active');
         imprintSection.classList.add('active');
 
         resCause.textContent = state.cause;
@@ -1501,13 +1784,11 @@
         const finalBlessing = state.blessing || '願你今天比昨天更有力量。';
         resBlessing.textContent = `「${finalBlessing}」`;
 
-        // Update Goal Demo Notice
         noticeAmount.textContent = `NT$ ${state.amount.toLocaleString()}`;
         goalDemoNotice.classList.add('active');
 
-        // Scroll gracefully to result
         imprintSection.scrollIntoView({ behavior: 'smooth' });
-      }
+      });
 
       // Add to Goodness Wall
       btnAddWall.addEventListener('click', () => {
@@ -1526,15 +1807,15 @@
         btnAddWall.textContent = '已放入善意牆';
       });
 
-      // Restart Ritual
+      // Restart
       btnRestart.addEventListener('click', () => {
         state.step = 1;
         state.amount = 300;
         state.cause = '弱勢家庭';
         state.causeIcon = '🌱';
         state.blessing = '';
+        state.isAnimating = false;
         
-        // Reset Inputs
         blessingInput.value = '';
         customInput.value = '';
         customWrap.classList.remove('active');
@@ -1550,14 +1831,22 @@
         btnAddWall.disabled = false;
         btnAddWall.textContent = '將我的祝福放入善意牆';
 
+        mindCard.classList.remove('active');
+        coinBtn.style.transition = 'none';
+        coinBtn.style.transform = 'translate(-50%, -50%) scale(1)';
+        coinBtn.style.opacity = '1';
+        guideText.style.opacity = '1';
+        mainGuide.textContent = '長按善意硬幣 注入祝福心念';
+        subGuide.textContent = '蓄力越久，水面迴響越深';
+
         imprintSection.classList.remove('active');
+        gameSection.classList.remove('active');
         ritualCard.style.display = 'block';
         updateStepUI();
 
         document.getElementById('ritual').scrollIntoView({ behavior: 'smooth' });
       });
 
-      // Helper HTML Escaper
       function escapeHtml(str) {
         return str.replace(/[&<>"']/g, function(m) {
           return {
@@ -1568,55 +1857,6 @@
             "'": '&#039;'
           }[m];
         });
-      }
-
-      // Particle System for Ritual Overlay
-      function initParticles() {
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
-
-        const particles = [];
-        const particleCount = 40;
-
-        for (let i = 0; i < particleCount; i++) {
-          particles.push({
-            x: width / 2,
-            y: height / 2,
-            vx: (Math.random() - 0.5) * 3,
-            vy: (Math.random() - 0.5) * 3 - 0.5,
-            size: Math.random() * 3 + 1,
-            alpha: 1,
-            color: '#E6CA65'
-          });
-        }
-
-        let animId;
-        function render() {
-          ctx.clearRect(0, 0, width, height);
-
-          particles.forEach((p, index) => {
-            p.x += p.vx;
-            p.y += p.vy;
-            p.alpha -= 0.008;
-
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(230, 202, 101, ${Math.max(p.alpha, 0)})`;
-            ctx.fill();
-
-            if (p.alpha <= 0) {
-              particles.splice(index, 1);
-            }
-          });
-
-          if (particles.length > 0) {
-            animId = requestAnimationFrame(render);
-          }
-        }
-
-        render();
       }
 
     });
